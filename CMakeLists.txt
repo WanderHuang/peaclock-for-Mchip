@@ -44,6 +44,8 @@ SOFTWARE.
 ]]
 
 cmake_minimum_required (VERSION 3.8 FATAL_ERROR)
+link_directories("/opt/homebrew/opt/icu4c/lib")
+include_directories("/opt/homebrew/opt/icu4c/include")
 
 set (OB_TARGET "peaclock")
 set (OB_VERSION "0.4.3")
@@ -95,17 +97,8 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
   set (OB_FLAGS_RELEASE "-O3 -flto")
   set (OB_LINKER_FLAGS_RELEASE "-O3 -flto -s")
 elseif ("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
-  if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-    if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS "${OB_COMPILER_VERSION_CLANG}")
-      message (FATAL_ERROR ">> The ${CMAKE_CXX_COMPILER_ID} compiler version ${CMAKE_CXX_COMPILER_VERSION} is unsupported, requires at least version ${OB_COMPILER_VERSION_CLANG}")
-    endif ()
-  elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "AppleClang")
-    message (FATAL_ERROR ">> The ${CMAKE_CXX_COMPILER_ID} compiler is unsupported")
-    if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS "${OB_COMPILER_VERSION_APPLECLANG}")
-      message (FATAL_ERROR ">> The ${CMAKE_CXX_COMPILER_ID} compiler version ${CMAKE_CXX_COMPILER_VERSION} is unsupported, requires at least version ${OB_COMPILER_VERSION_APPLECLANG}")
-    endif ()
-  else ()
-    message (FATAL_ERROR ">> The ${CMAKE_CXX_COMPILER_ID} compiler is unsupported")
+  if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS "${OB_COMPILER_VERSION_CLANG}")
+    message (FATAL_ERROR ">> The ${CMAKE_CXX_COMPILER_ID} compiler version ${CMAKE_CXX_COMPILER_VERSION} is unsupported, requires at least version ${OB_COMPILER_VERSION_CLANG}")
   endif ()
 
   set (OB_FLAGS_GENERAL "-std=c++17 -fdiagnostics-color=auto -ferror-limit=8 -stdlib=libc++")

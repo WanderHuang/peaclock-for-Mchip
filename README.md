@@ -127,6 +127,7 @@ the latest __GCC__.
 ```sh
 brew install gcc
 brew link gcc
+brew install icu4u
 ```
 
 The following CMake argument will then need to be appended to the end of the line when running the shell script.
