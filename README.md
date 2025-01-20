@@ -128,6 +128,7 @@ the latest __GCC__.
 brew install gcc
 brew link gcc
 brew install icu4u
+# if use Clang build tools: brew install llvm
 ```
 
 The following CMake argument will then need to be appended to the end of the line when running the shell script.
@@ -135,6 +136,8 @@ Remember to replace the placeholder `<path-to-g++>` with the canonical path to t
 
 ```sh
 ./RUNME.sh build -- -DCMAKE_CXX_COMPILER='<path-to-g++>'
+
+# ./RUNME.sh build -- -DCMAKE_CXX_COMPILER=/opt/homebrew/opt/llvm/bin/clang++
 ```
 
 ## Build
